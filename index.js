@@ -16,7 +16,7 @@ app.post("/api/rdw", async (req, res) => {
   }
 
   const cleanedPlate = license_plate.replace(/[^A-Z0-9]/gi, "").toUpperCase();
-
+  console.log(`✅ Request: ${cleanedPlate}`);
   try {
     const response = await fetch(`https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=${cleanedPlate}`);
     const data = await response.json();
@@ -26,6 +26,7 @@ app.post("/api/rdw", async (req, res) => {
     }
 
     const voertuig = data[0];
+    console.log(`✅ Kenteken: ${cleanedPlate}`);
     res.json({
       merk: voertuig.merk,
       model: voertuig.handelsbenaming,
